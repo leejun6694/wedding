@@ -1,11 +1,561 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>청첩장</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>준 & 수빈 결혼식</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red: #8B2635;
+      --red-light: #f5eaec;
+      --black: #1a1a1a;
+      --gray: #888;
+      --light: #f8f5f2;
+      --border: #e8e4df;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #fff;
+      color: var(--black);
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* ── 1. HERO ── */
+    .hero {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+      background: #e8e0d8;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* 메인 사진이 없을 때 플레이스홀더 */
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #f0ece6;
+    }
+    .hero-placeholder .icon { font-size: 72px; line-height: 1; }
+    .hero-placeholder .ph-name { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 700; letter-spacing: 3px; color: var(--black); }
+    .hero-placeholder .ph-hint { font-size: 12px; color: #bbb; margin-top: 16px; }
+
+    /* ── 2. TITLE SECTION ── */
+    .title-section {
+      padding: 52px 32px 44px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .couple-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .couple-name .amp { color: var(--red); }
+    .hairline {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
+      margin: 24px auto;
+    }
+    .wedding-info { display: flex; flex-direction: column; gap: 10px; }
+    .date-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--black);
+    }
+    .info-line {
+      font-size: 13px;
+      color: var(--gray);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .info-line::before, .info-line::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--border);
+    }
+    .venue-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .venue-addr {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    /* ── 3. GALLERY ── */
+    .gallery-section { padding: 40px 0 48px; }
+    .section-eyebrow {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* 탭 */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 1;
+      min-width: 68px;
+      padding: 15px 6px;
+      text-align: center;
+      font-size: 12px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #bbb;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+    .tab.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+      font-weight: 500;
+    }
+
+    /* 사진 그리드 */
+    .photo-grid {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .photo-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: #e8e0d8;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-item:active img { transform: scale(0.97); }
+    /* 플레이스홀더 칸 */
+    .photo-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #bbb;
+      font-family: 'Noto Sans KR', sans-serif;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── 4. LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+
+    .lb-close {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+      padding: 8px;
+    }
+
+    .lb-section-label {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .lb-track-wrap {
+      width: 100%;
+      max-width: 430px;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+    .lb-track {
+      display: flex;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .lb-slide {
+      width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 72vh;
+    }
+    .lb-slide img {
+      width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lb-slide .lb-ph {
+      width: 100%;
+      height: 56vw;
+      max-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      gap: 8px;
+    }
+
+    .lb-footer {
+      width: 100%;
+      max-width: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 0;
+    }
+    .lb-nav-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .lb-nav-btn:active { background: rgba(255,255,255,0.18); }
+    .lb-counter {
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-family: 'Noto Sans KR', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    /* 탭 전환 애니메이션 */
+    .photo-grid { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lb-track { transition: none; }
+      .photo-grid { animation: none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>헬로우 준, 수빈 웨딩💍</h1>
+
+<!-- ① 메인 사진 -->
+<section class="hero">
+  <!--
+    메인 사진을 넣으려면:
+    <img src="./images/main.jpg" alt="준 & 수빈" />
+    위 태그를 추가하고 아래 hero-placeholder div는 삭제하세요.
+  -->
+  <div class="hero-placeholder">
+    <div class="ph-name">준 & 수빈</div>
+    <div class="ph-hint">메인 사진 교체 위치 · images/studio/01.jpg</div>
+  </div>
+</section>
+
+<!-- ② 결혼식 정보 -->
+<section class="title-section">
+  <p class="eyebrow">Wedding Invitation</p>
+  <p class="couple-name">준 <span class="amp">&</span> 수빈</p>
+  <div class="hairline"></div>
+  <div class="wedding-info">
+    <p class="date-text">2025 · 09 · 13</p>
+    <p class="info-line">일요일 오후 12시 30분</p>
+    <p class="venue-name">셀렙앤어셈</p>
+    <p class="venue-addr">서울 강남구 테헤란로 5길 9</p>
+  </div>
+</section>
+
+<!-- ③ 갤러리 -->
+<section class="gallery-section">
+  <p class="section-eyebrow">Gallery</p>
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-tab="studio" data-label="스튜디오">스튜디오</div>
+    <div class="tab" data-tab="spring" data-label="봄">봄</div>
+    <div class="tab" data-tab="summer" data-label="여름">여름</div>
+    <div class="tab" data-tab="autumn" data-label="가을">가을</div>
+    <div class="tab" data-tab="winter" data-label="겨울">겨울</div>
+  </div>
+  <div class="photo-grid" id="photoGrid"></div>
+</section>
+
+<!-- ④ 라이트박스 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 보기">
+  <span class="lb-section-label" id="lbSectionLabel">스튜디오</span>
+  <button class="lb-close" id="lbClose" aria-label="닫기">✕</button>
+  <div class="lb-track-wrap" id="lbTrackWrap">
+    <div class="lb-track" id="lbTrack"></div>
+  </div>
+  <div class="lb-footer">
+    <button class="lb-nav-btn" id="lbPrev" aria-label="이전">&#8592;</button>
+    <span class="lb-counter" id="lbCounter">1 / 6</span>
+    <button class="lb-nav-btn" id="lbNext" aria-label="다음">&#8594;</button>
+  </div>
+</div>
+
+<script>
+  /*
+   * ─── 사진 데이터 설정 ───────────────────────────────
+   *
+   * 각 탭의 photos 배열에 이미지 경로를 입력하세요.
+   * 예: src: './images/studio_01.jpg'
+   *
+   * 사진이 없는 경우 src: null 로 두면 회색 플레이스홀더가 표시됩니다.
+   */
+  const TABS = [
+    {
+      id: 'studio',
+      label: '스튜디오',
+      photos: [
+        { src: './images/studio/01.jpg' }, { src: './images/studio/02.jpg' }, { src: './images/studio/03.jpg' }, { src: './images/studio/04.jpg' },
+        { src: './images/studio/05.jpg' }, { src: './images/studio/06.jpg' }, { src: './images/studio/07.jpg' }, { src: './images/studio/08.jpg' },
+        { src: './images/studio/09.jpg' }, { src: './images/studio/10.jpg' }, { src: './images/studio/11.jpg' },
+      ]
+    },
+    {
+      id: 'spring',
+      label: '봄',
+      photos: [
+        { src: './images/spring/01.jpg' }, { src: './images/spring/02.jpg' }, { src: './images/spring/03.jpg' }, { src: './images/spring/04.jpg' },
+        { src: './images/spring/05.jpg' }, { src: './images/spring/06.jpg' }, { src: './images/spring/07.jpg' }, { src: './images/spring/08.jpg' },
+        { src: './images/spring/09.jpg' }, { src: './images/spring/10.jpg' }, { src: './images/spring/11.jpg' }, { src: './images/spring/12.jpg' },
+      ]
+    },
+    {
+      id: 'summer',
+      label: '여름',
+      photos: [
+        { src: null },
+      ]
+    },
+    {
+      id: 'autumn',
+      label: '가을',
+      photos: [
+        { src: './images/autumn/01.jpg' }, { src: './images/autumn/02.jpg' }, { src: './images/autumn/03.jpg' }, { src: './images/autumn/04.jpg' },
+        { src: './images/autumn/05.jpg' }, { src: './images/autumn/06.jpg' }, { src: './images/autumn/07.jpg' }, { src: './images/autumn/08.jpg' },
+        { src: './images/autumn/09.jpg' }, { src: './images/autumn/10.jpg' }, { src: './images/autumn/11.jpg' },
+      ]
+    },
+    {
+      id: 'winter',
+      label: '겨울',
+      photos: [
+        { src: './images/winter/01.jpg' }, { src: './images/winter/02.jpg' }, { src: './images/winter/03.jpg' }, { src: './images/winter/04.jpg' },
+        { src: './images/winter/05.jpg' }, { src: './images/winter/06.jpg' }, { src: './images/winter/07.jpg' }, { src: './images/winter/08.jpg' },
+        { src: './images/winter/09.jpg' }, { src: './images/winter/10.jpg' }, { src: './images/winter/11.jpg' }, { src: './images/winter/12.jpg' },
+        { src: './images/winter/13.jpg' }, { src: './images/winter/14.jpg' }, { src: './images/winter/15.jpg' },
+      ]
+    },
+  ];
+
+  /* ─── 내부 로직 (수정 불필요) ─────────────────────── */
+  const BG_COLORS = ['#e8e0d8','#ddd5ca','#f0ece6','#e4ddd4','#ede7e0','#f5f2ee'];
+
+  let currentTabIdx = 0;
+  let currentPhotoIdx = 0;
+
+  function getTabData() { return TABS[currentTabIdx]; }
+
+  /* 그리드 렌더 */
+  function renderGrid() {
+    const grid = document.getElementById('photoGrid');
+    const tab = getTabData();
+    grid.innerHTML = '';
+    tab.photos.forEach((photo, i) => {
+      const item = document.createElement('div');
+      item.className = 'photo-item';
+      item.style.background = BG_COLORS[i % BG_COLORS.length];
+      if (photo.src) {
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.alt = `${tab.label} ${i + 1}`;
+        img.loading = 'lazy';
+        item.appendChild(img);
+      } else {
+        item.innerHTML = `<div class="photo-ph">${tab.label}<br>${i + 1}</div>`;
+      }
+      item.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(item);
+    });
+  }
+
+  /* 라이트박스 열기 */
+  function openLightbox(idx) {
+    currentPhotoIdx = idx;
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    buildLightboxSlides();
+    jumpToSlide(false);
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* 슬라이드 생성 */
+  function buildLightboxSlides() {
+    const track = document.getElementById('lbTrack');
+    const tab = getTabData();
+    track.innerHTML = '';
+    tab.photos.forEach((photo, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'lb-slide';
+      if (photo.src) {
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.alt = `${tab.label} ${i + 1}`;
+        slide.appendChild(img);
+      } else {
+        slide.innerHTML = `<div class="lb-ph" style="background:${BG_COLORS[i % BG_COLORS.length]}"><span style="font-size:11px;color:#999;">${tab.label} 사진 ${i + 1}</span><span style="font-size:10px;color:#bbb;">images/${tab.id}_0${i+1}.jpg</span></div>`;
+      }
+      track.appendChild(slide);
+    });
+  }
+
+  /* 슬라이드 위치 이동 */
+  function jumpToSlide(animate) {
+    const track = document.getElementById('lbTrack');
+    const counter = document.getElementById('lbCounter');
+    const label = document.getElementById('lbSectionLabel');
+    const tab = getTabData();
+    track.style.transition = animate ? 'transform 0.38s cubic-bezier(0.4,0,0.2,1)' : 'none';
+    track.style.transform = `translateX(-${currentPhotoIdx * 100}%)`;
+    counter.textContent = `${currentPhotoIdx + 1} / ${tab.photos.length}`;
+    label.textContent = tab.label;
+  }
+
+  function prevPhoto() {
+    const len = getTabData().photos.length;
+    currentPhotoIdx = (currentPhotoIdx - 1 + len) % len;
+    jumpToSlide(true);
+  }
+  function nextPhoto() {
+    const len = getTabData().photos.length;
+    currentPhotoIdx = (currentPhotoIdx + 1) % len;
+    jumpToSlide(true);
+  }
+
+  /* 이벤트 바인딩 */
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', prevPhoto);
+  document.getElementById('lbNext').addEventListener('click', nextPhoto);
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
+  /* 키보드 */
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  /* 터치 스와이프 */
+  let touchStartX = 0;
+  const lbWrap = document.getElementById('lbTrackWrap');
+  lbWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lbWrap.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 44) diff > 0 ? nextPhoto() : prevPhoto();
+  });
+
+  /* 탭 전환 */
+  document.querySelectorAll('.tab').forEach((tab, idx) => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentTabIdx = idx;
+      renderGrid();
+    });
+  });
+
+  /* 초기 렌더 */
+  renderGrid();
+</script>
 </body>
 </html>
