@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>준 & 수빈 결혼식</title>
+  <title>준&수빈 모바일 청첩장</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -130,8 +130,82 @@
       color: #aaa;
     }
 
+    /* ── 달력 ── */
+    .calendar-section {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+    .calendar {
+      margin: 0 28px;
+    }
+    .cal-month {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+    }
+    .cal-header {
+      text-align: center;
+      font-size: 11px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #aaa;
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .cal-header.sun { color: #c0392b; }
+    .cal-header.sat { color: #4a7abf; }
+
+    .cal-day {
+      text-align: center;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #555;
+      padding: 9px 0;
+      position: relative;
+      line-height: 1;
+    }
+    .cal-day.empty { }
+    .cal-day.sun { color: #c0392b; }
+    .cal-day.sat { color: #4a7abf; }
+
+    /* 결혼식 날 — 빨간 원 */
+    .cal-day.wedding-day {
+      color: #fff !important;
+      font-weight: 600;
+    }
+    .cal-day.wedding-day::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--red);
+      z-index: -1;
+    }
+    .wedding-dot { display: none; }
+
+    .cal-label {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 20px;
+      letter-spacing: 1px;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
     /* ── 3. GALLERY ── */
-    .gallery-section { padding: 40px 0 48px; }
+    .gallery-section { padding: 20px 0 48px; }
     .section-eyebrow {
       text-align: center;
       font-size: 10px;
@@ -416,9 +490,62 @@
   </div>
 </section>
 
+<!-- 달력 섹션 -->
+<section class="calendar-section">
+  <div class="calendar">
+    <p class="cal-month">9월</p>
+    <div class="cal-grid">
+      <div class="cal-header sun">일</div>
+      <div class="cal-header">월</div>
+      <div class="cal-header">화</div>
+      <div class="cal-header">수</div>
+      <div class="cal-header">목</div>
+      <div class="cal-header">금</div>
+      <div class="cal-header sat">토</div>
+
+      <!-- 9월 1일 = 화요일 → 앞에 빈칸 2개 -->
+      <div class="cal-day empty"></div>
+      <div class="cal-day empty"></div>
+      <div class="cal-day">1</div>
+      <div class="cal-day">2</div>
+      <div class="cal-day">3</div>
+      <div class="cal-day">4</div>
+      <div class="cal-day sat">5</div>
+
+      <div class="cal-day sun">6</div>
+      <div class="cal-day">7</div>
+      <div class="cal-day">8</div>
+      <div class="cal-day">9</div>
+      <div class="cal-day">10</div>
+      <div class="cal-day">11</div>
+      <div class="cal-day sat">12</div>
+
+      <div class="cal-day sun wedding-day">13<span class="wedding-dot"></span></div>
+      <div class="cal-day">14</div>
+      <div class="cal-day">15</div>
+      <div class="cal-day">16</div>
+      <div class="cal-day">17</div>
+      <div class="cal-day">18</div>
+      <div class="cal-day sat">19</div>
+
+      <div class="cal-day sun">20</div>
+      <div class="cal-day">21</div>
+      <div class="cal-day">22</div>
+      <div class="cal-day">23</div>
+      <div class="cal-day">24</div>
+      <div class="cal-day">25</div>
+      <div class="cal-day sat">26</div>
+
+      <div class="cal-day sun">27</div>
+      <div class="cal-day">28</div>
+      <div class="cal-day">29</div>
+      <div class="cal-day">30</div>
+    </div>
+  </div>
+</section>
+
 <!-- ③ 갤러리 -->
 <section class="gallery-section">
-  <p class="section-eyebrow">Gallery</p>
   <div class="tabs" id="tabs">
     <div class="tab active" data-tab="studio" data-label="스튜디오">스튜디오</div>
     <div class="tab" data-tab="spring" data-label="봄">봄</div>
