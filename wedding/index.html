@@ -401,6 +401,64 @@
       .lb-track { transition: none; }
       .photo-grid { animation: none; }
     }
+
+    /* ── 지도 ── */
+    .map-section {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+    .map-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--black);
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+    .map-venue {
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .map-addr {
+      font-size: 12px;
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .map-wrap {
+      width: 100%;
+      overflow: hidden;
+    }
+    .map-btns {
+      display: flex;
+      gap: 10px;
+      padding: 16px 24px 0;
+    }
+    .map-btn {
+      flex: 1;
+      padding: 13px 0;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .map-btn:active { opacity: 0.7; }
+    .map-btn.kakao {
+      background: #FEE500;
+      color: #3C1E1E;
+    }
+    .map-btn.naver {
+      background: #03C75A;
+      color: #fff;
+    }
   </style>
 </head>
 
@@ -569,6 +627,39 @@
     <button class="lb-nav-btn" id="lbNext" aria-label="다음">&#8594;</button>
   </div>
 </div>
+
+<!-- 지도 섹션 -->
+<section class="map-section">
+  <p class="map-title">찾아오시는 길</p>
+  <p class="map-venue">셀렙앤어셈</p>
+  <p class="map-addr">서울 강남구 언주로 711</p>
+
+  <div class="map-wrap">
+  <div id="daumRoughmapContainer1782567365452" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+    <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+    <script charset="UTF-8">
+      new daum.roughmap.Lander({
+        "timestamp" : "1782567365452",
+        "key" : "q9rgycuuv8e",
+        "mapWidth" : "640",
+        "mapHeight" : "360"
+      }).render();
+    </script>
+  </div>
+
+  <div class="map-btns">
+    <a class="map-btn kakao"
+      href="https://kko.to/lX7-xQgHdL"
+      target="_blank">
+      🗺 카카오맵
+    </a>
+    <a class="map-btn naver"
+      href="https://map.naver.com/p/search/셀렙앤어셈/place/1134993560"
+      target="_blank">
+      🗺 네이버지도
+    </a>
+  </div>
+</section>
 
 <script>
   /*
