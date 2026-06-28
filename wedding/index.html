@@ -10,30 +10,57 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --red: #8B2635;
-      --red-light: #f5eaec;
-      --black: #1a1a1a;
-      --gray: #888;
-      --light: #f8f5f2;
-      --border: #e8e4df;
+      --point:   #d27364;   /* 포인트 — 웜 테라코타 */
+      --point-light: #f9edeb;
+      --black:   #1e1a18;
+      --gray:    #9a9088;
+      --border:  #e6dfd7;
+
+      /* 섹션 배경 — 밝은 쪽에서 따뜻한 쪽으로 */
+      --s1: #ffffff;        /* 인사말 */
+      --s2: #faf7f4;        /* 부모님 소개 */
+      --s3: #f5f0ea;        /* 날짜·장소 */
+      --s4: #efe8df;        /* 달력 */
+      --s5: #f9f6f2;        /* 갤러리 */
+      --s6: #faf7f4;        /* 지도 */
     }
 
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background: #fff;
+      background: var(--s1);
       color: var(--black);
       max-width: 430px;
       margin: 0 auto;
       min-height: 100vh;
     }
 
-    /* ── 1. HERO ── */
+    /* ━━━ 공통 섹션 레이블 ━━━ */
+    .sec-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--point);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 6px;
+      font-family: 'Noto Sans KR', sans-serif;
+      opacity: 0.75;
+    }
+    .sec-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 21px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--black);
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ━━━ 1. HERO ━━━ */
     .hero {
       width: 100%;
       aspect-ratio: 3 / 4;
       overflow: hidden;
-      position: relative;
       background: #e8e0d8;
     }
     .hero img {
@@ -42,33 +69,19 @@
       object-fit: cover;
       display: block;
     }
-    /* 메인 사진이 없을 때 플레이스홀더 */
-    .hero-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: #f0ece6;
-    }
-    .hero-placeholder .icon { font-size: 72px; line-height: 1; }
-    .hero-placeholder .ph-name { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 700; letter-spacing: 3px; color: var(--black); }
-    .hero-placeholder .ph-hint { font-size: 12px; color: #bbb; margin-top: 16px; }
 
-    /* ── 2. TITLE SECTION ── */
-    .title-section {
-      padding: 52px 32px 44px;
+    /* ━━━ 2. 인사말 — #ffffff ━━━ */
+    .greeting-section {
+      background: var(--s1);
+      padding: 60px 32px 56px;
       text-align: center;
-      border-bottom: 1px solid var(--border);
     }
     .eyebrow {
       font-size: 10px;
       letter-spacing: 5px;
       color: var(--gray);
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
     .couple-name {
       font-family: 'Noto Serif KR', serif;
@@ -76,31 +89,89 @@
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--black);
-      margin-bottom: 6px;
     }
-    .couple-name .amp { color: var(--red); }
-    .hairline {
+    .couple-name .amp { color: var(--point); }
+    .hairline-v {
       width: 1px;
-      height: 56px;
+      height: 48px;
       background: linear-gradient(to bottom, transparent, var(--border), transparent);
       margin: 24px auto;
     }
     .wedding-message {
       font-family: 'Noto Serif KR', serif;
       font-size: 13.5px;
-      font-weight: 400;
-      color: #666;
-      line-height: 2.1;
+      color: #877d75;
+      line-height: 2.15;
       text-align: center;
       letter-spacing: 0.3px;
-      margin: 28px 0 0;
       word-break: keep-all;
     }
-    .wedding-info { display: flex; flex-direction: column; gap: 10px; }
+
+    /* ━━━ 3. 부모님 소개 — #faf7f4 ━━━ */
+    .family-section {
+      background: var(--s2);
+      padding: 52px 32px;
+      text-align: center;
+    }
+    .family-ornament {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .orn-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .orn-icon {
+      font-size: 14px;
+      color: var(--point);
+      opacity: 0.55;
+    }
+    .family-names {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .family-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+    .parents {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 13px;
+      color: var(--gray);
+      letter-spacing: 0.3px;
+    }
+    .relation {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 12px;
+      color: #bbb;
+    }
+    .person-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 2px;
+    }
+
+    /* ━━━ 4+5. 날짜 + 달력 통합 — #f5f0ea ━━━ */
+    .date-cal-section {
+      background: var(--s3);
+      padding: 56px 32px;
+      text-align: center;
+    }
+    .wedding-info { display: flex; flex-direction: column; gap: 10px; margin-bottom: 48px; }
     .date-text {
       font-family: 'Noto Serif KR', serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 26px;
+      font-weight: 700;
       letter-spacing: 2px;
       color: var(--black);
     }
@@ -116,103 +187,81 @@
     .info-line::before, .info-line::after {
       content: '';
       display: inline-block;
-      width: 20px;
+      width: 18px;
       height: 1px;
       background: var(--border);
     }
-    .venue-name {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--black);
-    }
-    .venue-addr {
-      font-size: 12px;
-      color: #aaa;
-    }
 
-    /* ── 달력 ── */
-    .calendar-section {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-    }
-    .calendar {
-      margin: 0 28px;
-    }
-    .cal-month {
-      font-family: 'Noto Serif KR', serif;
-      font-size: 22px;
-      font-weight: 600;
-      text-align: center;
-      color: var(--black);
-      margin-bottom: 24px;
-      letter-spacing: 2px;
-    }
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 0;
-    }
+    /* 달력 */
+    .calendar { margin: 0 auto; max-width: 340px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
     .cal-header {
       text-align: center;
       font-size: 11px;
       font-family: 'Noto Sans KR', sans-serif;
-      color: #aaa;
+      color: #b8afa6;
       padding-bottom: 10px;
       letter-spacing: 1px;
     }
-    .cal-header.sun { color: #c0392b; }
-    .cal-header.sat { color: #4a7abf; }
-
+    .cal-header.sun { color: #c97b6e; }
+    .cal-header.sat { color: #7a9abf; }
     .cal-day {
       text-align: center;
       font-size: 13px;
       font-family: 'Noto Sans KR', sans-serif;
-      color: #555;
+      color: #6a6058;
       padding: 9px 0;
       position: relative;
       line-height: 1;
     }
-    .cal-day.empty { }
-    .cal-day.sun { color: #c0392b; }
-    .cal-day.sat { color: #4a7abf; }
-
-    /* 결혼식 날 — 빨간 원 */
+    .cal-day.sun { color: #c97b6e; }
+    .cal-day.sat { color: #7a9abf; }
     .cal-day.wedding-day {
       color: #fff !important;
-      font-weight: 600;
+      font-weight: 700;
+      z-index: 1;
     }
     .cal-day.wedding-day::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: var(--red);
+      background: var(--point);
       z-index: -1;
     }
     .wedding-dot { display: none; }
 
-    .cal-label {
-      text-align: center;
-      font-size: 12px;
+    /* D-Day */
+    .dday-wrap {
+      margin-top: 36px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .dday-sub {
+      font-size: 13px;
       color: var(--gray);
-      margin-top: 20px;
-      letter-spacing: 1px;
       font-family: 'Noto Sans KR', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .dday-number {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--point);
+      letter-spacing: 1px;
+      line-height: 1;
     }
 
-    /* ── 3. GALLERY ── */
-    .gallery-section { padding: 20px 0 48px; }
-    .section-eyebrow {
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: var(--gray);
-      text-transform: uppercase;
-      margin-bottom: 24px;
+    /* ━━━ 6. 갤러리 — #f9f6f2 ━━━ */
+    .gallery-section {
+      background: var(--s5);
+      padding-top: 56px;
+      padding-bottom: 0px;
     }
 
     /* 탭 */
@@ -222,7 +271,7 @@
       scrollbar-width: none;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: #fff;
+      background: var(--s5);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -235,7 +284,7 @@
       text-align: center;
       font-size: 12px;
       font-family: 'Noto Sans KR', sans-serif;
-      color: #bbb;
+      color: #c0b8b0;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
@@ -244,24 +293,24 @@
       user-select: none;
     }
     .tab.active {
-      color: var(--red);
-      border-bottom-color: var(--red);
+      color: var(--point);
+      border-bottom-color: var(--point);
       font-weight: 500;
     }
 
     /* 사진 그리드 */
     .photo-grid {
-      padding: 12px;
+      padding: 3px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 3px;
+      animation: fadeIn 0.3s ease;
     }
     .photo-item {
       aspect-ratio: 1;
       overflow: hidden;
       cursor: pointer;
-      position: relative;
-      background: #e8e0d8;
+      background: #e6dfd7;
     }
     .photo-item img {
       width: 100%;
@@ -271,7 +320,6 @@
       transition: transform 0.4s ease;
     }
     .photo-item:active img { transform: scale(0.97); }
-    /* 플레이스홀더 칸 */
     .photo-ph {
       width: 100%;
       height: 100%;
@@ -285,44 +333,78 @@
       line-height: 1.4;
     }
 
-    /* ── 4. LIGHTBOX ── */
+    /* ━━━ 7. 지도 — #faf7f4 ━━━ */
+    .map-section {
+      background: var(--s1);
+      padding: 56px 0 52px;
+    }
+    .map-venue {
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .map-addr {
+      font-size: 12px;
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+    .map-wrap { width: 100%; overflow: hidden; }
+    .map-btns {
+      display: flex;
+      gap: 10px;
+      padding: 20px 24px 0;
+    }
+    .map-btn {
+      flex: 1;
+      padding: 13px 0;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .map-btn:active { opacity: 0.7; }
+    .map-btn.kakao { background: #FEE500; color: #3C1E1E; }
+    .map-btn.naver { background: #03C75A; color: #fff; }
+
+    /* ━━━ LIGHTBOX ━━━ */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.94);
+      background: rgba(20,16,14,0.95);
       z-index: 1000;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
     .lightbox.open { display: flex; }
-
     .lb-close {
       position: fixed;
-      top: 18px;
-      right: 20px;
-      color: rgba(255,255,255,0.8);
+      top: 18px; right: 20px;
+      color: rgba(255,255,255,0.7);
       font-size: 24px;
-      line-height: 1;
       cursor: pointer;
       background: none;
       border: none;
       z-index: 1001;
       padding: 8px;
     }
-
     .lb-section-label {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      color: rgba(255,255,255,0.5);
+      top: 22px; left: 20px;
+      color: rgba(255,255,255,0.4);
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-family: 'Noto Sans KR', sans-serif;
     }
-
     .lb-track-wrap {
       width: 100%;
       max-width: 430px;
@@ -331,7 +413,7 @@
     }
     .lb-track {
       display: flex;
-      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
       will-change: transform;
     }
     .lb-slide {
@@ -361,7 +443,6 @@
       font-family: 'Noto Sans KR', sans-serif;
       gap: 8px;
     }
-
     .lb-footer {
       width: 100%;
       max-width: 430px;
@@ -371,12 +452,11 @@
       padding: 20px 24px 0;
     }
     .lb-nav-btn {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
       font-size: 20px;
       cursor: pointer;
       display: flex;
@@ -385,79 +465,21 @@
       transition: background 0.2s;
       user-select: none;
     }
-    .lb-nav-btn:active { background: rgba(255,255,255,0.18); }
+    .lb-nav-btn:active { background: rgba(255,255,255,0.15); }
     .lb-counter {
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
       font-size: 12px;
       font-family: 'Noto Sans KR', sans-serif;
       letter-spacing: 2px;
     }
 
-    /* 탭 전환 애니메이션 */
-    .photo-grid { animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     @media (prefers-reduced-motion: reduce) {
       .lb-track { transition: none; }
       .photo-grid { animation: none; }
-    }
-
-    /* ── 지도 ── */
-    .map-section {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-    }
-    .map-title {
-      font-family: 'Noto Serif KR', serif;
-      font-size: 22px;
-      font-weight: 600;
-      text-align: center;
-      color: var(--black);
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-    }
-    .map-venue {
-      font-size: 15px;
-      font-weight: 500;
-      text-align: center;
-      color: var(--black);
-      margin-bottom: 4px;
-    }
-    .map-addr {
-      font-size: 12px;
-      text-align: center;
-      color: var(--gray);
-      margin-bottom: 20px;
-    }
-    .map-wrap {
-      width: 100%;
-      overflow: hidden;
-    }
-    .map-btns {
-      display: flex;
-      gap: 10px;
-      padding: 16px 24px 0;
-    }
-    .map-btn {
-      flex: 1;
-      padding: 13px 0;
-      text-align: center;
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 500;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
-    }
-    .map-btn:active { opacity: 0.7; }
-    .map-btn.kakao {
-      background: #FEE500;
-      color: #3C1E1E;
-    }
-    .map-btn.naver {
-      background: #03C75A;
-      color: #fff;
     }
   </style>
 </head>
@@ -468,13 +490,11 @@
 <!-- 음악 토글 버튼 -->
 <button id="musicBtn" onclick="toggleMusic()" style="
   position: fixed;
-  top: 16px;
-  right: 16px;
-  width: 44px;
-  height: 44px;
+  top: 16px; right: 16px;
+  width: 44px; height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(139,38,53,0.2);
-  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(210,115,100,0.25);
+  background: rgba(255,255,255,0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
@@ -483,7 +503,7 @@
   align-items: center;
   justify-content: center;
   z-index: 500;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 ">🎵</button>
 
 <script>
@@ -491,29 +511,17 @@
   const btn = document.getElementById('musicBtn');
   let playing = false;
 
-  // 첫 터치/클릭 시 자동 재생
   function startMusic() {
-    bgm.play().then(() => {
-      playing = true;
-      btn.textContent = '🎵';
-    }).catch(() => {});
+    bgm.play().then(() => { playing = true; btn.textContent = '🎵'; }).catch(() => {});
     document.removeEventListener('touchstart', startMusic);
     document.removeEventListener('click', startMusic);
   }
-
   document.addEventListener('touchstart', startMusic, { once: true });
   document.addEventListener('click', startMusic, { once: true });
 
   function toggleMusic() {
-    if (playing) {
-      bgm.pause();
-      btn.textContent = '🔈';
-      playing = false;
-    } else {
-      bgm.play();
-      btn.textContent = '🎵';
-      playing = true;
-    }
+    if (playing) { bgm.pause(); btn.textContent = '🔈'; playing = false; }
+    else { bgm.play(); btn.textContent = '🎵'; playing = true; }
   }
 </script>
 
@@ -521,14 +529,14 @@
 
 <!-- ① 메인 사진 -->
 <section class="hero">
-  <img src="./images/studio/01.jpg" alt="준 & 수빈" />
+  <img src="./images/main.png" alt="준 & 수빈" />
 </section>
 
-<!-- ② 결혼식 정보 -->
-<section class="title-section">
+<!-- ② 인사말 — #ffffff -->
+<section class="greeting-section">
   <p class="eyebrow">Wedding Invitation</p>
   <p class="couple-name">준 <span class="amp">&</span> 수빈</p>
-
+  <div class="hairline-v"></div>
   <p class="wedding-message">
     소소한 하루를 함께 나누며<br>
     사랑으로 물들었습니다<br>
@@ -537,21 +545,39 @@
     <br>
     초가을의 문턱에서<br>
     저희의 소중한 순간을 함께 해주세요
-    </p>
-  <div class="hairline"></div>
+  </p>
+</section>
 
-  <div class="wedding-info">
-    <p class="date-text">2026 · 09 · 13</p>
-    <p class="info-line">일요일 오후 12시 30분</p>
-    <p class="venue-name">셀렙앤어셈</p>
-    <p class="venue-addr">서울 강남구 언주로 711</p>
+<!-- ③ 부모님 소개 — #faf7f4 -->
+<section class="family-section">
+  <div class="family-ornament">
+    <div class="orn-line"></div>
+    <span class="orn-icon">❀</span>
+    <div class="orn-line"></div>
+  </div>
+  <div class="family-names">
+    <div class="family-row">
+      <span class="parents">이순호 · 김매화</span>
+      <span class="relation">의 아들,</span>
+      <span class="person-name">이 준</span>
+    </div>
+    <div class="family-row">
+      <span class="parents">김승준 · 조혜경</span>
+      <span class="relation">의 딸,</span>
+      <span class="person-name">김수빈</span>
+    </div>
   </div>
 </section>
 
-<!-- 달력 섹션 -->
-<section class="calendar-section">
+<!-- ④+⑤ 날짜 + 달력 통합 — #f5f0ea -->
+<section class="date-cal-section">
+  <p class="sec-label">Date</p>
+  <div class="wedding-info">
+    <p class="date-text">2026 · 09 · 13</p>
+    <p class="info-line">일요일 오후 12시 30분</p>
+  </div>
+
   <div class="calendar">
-    <p class="cal-month">9월</p>
     <div class="cal-grid">
       <div class="cal-header sun">일</div>
       <div class="cal-header">월</div>
@@ -561,7 +587,6 @@
       <div class="cal-header">금</div>
       <div class="cal-header sat">토</div>
 
-      <!-- 9월 1일 = 화요일 → 앞에 빈칸 2개 -->
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
       <div class="cal-day">1</div>
@@ -578,7 +603,7 @@
       <div class="cal-day">11</div>
       <div class="cal-day sat">12</div>
 
-      <div class="cal-day sun wedding-day">13<span class="wedding-dot"></span></div>
+      <div class="cal-day sun wedding-day">13</div>
       <div class="cal-day">14</div>
       <div class="cal-day">15</div>
       <div class="cal-day">16</div>
@@ -600,10 +625,18 @@
       <div class="cal-day">30</div>
     </div>
   </div>
+
+  <!-- D-Day -->
+  <div class="dday-wrap">
+    <p class="dday-sub">준♥수빈 결혼식까지</p>
+    <p class="dday-number" id="ddayNumber">-</p>
+  </div>
 </section>
 
-<!-- ③ 갤러리 -->
+<!-- ⑥ 갤러리 — #f9f6f2 -->
 <section class="gallery-section">
+  <p class="sec-label">Gallery</p>
+  <p class="sec-title">사진첩</p>
   <div class="tabs" id="tabs">
     <div class="tab active" data-tab="studio" data-label="스튜디오">스튜디오</div>
     <div class="tab" data-tab="spring" data-label="봄">봄</div>
@@ -614,7 +647,7 @@
   <div class="photo-grid" id="photoGrid"></div>
 </section>
 
-<!-- ④ 라이트박스 -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 보기">
   <span class="lb-section-label" id="lbSectionLabel">스튜디오</span>
   <button class="lb-close" id="lbClose" aria-label="닫기">✕</button>
@@ -628,14 +661,14 @@
   </div>
 </div>
 
-<!-- 지도 섹션 -->
+<!-- ⑦ 지도 — #faf7f4 -->
 <section class="map-section">
-  <p class="map-title">찾아오시는 길</p>
+  <p class="sec-label">Location</p>
+  <p class="sec-title">찾아오시는 길</p>
   <p class="map-venue">셀렙앤어셈</p>
   <p class="map-addr">서울 강남구 언주로 711</p>
-
   <div class="map-wrap">
-  <div id="daumRoughmapContainer1782569167127" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+    <div id="daumRoughmapContainer1782569167127" class="root_daum_roughmap root_daum_roughmap_landing"></div>
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
     <script charset="UTF-8">
       new daum.roughmap.Lander({
@@ -646,83 +679,59 @@
       }).render();
     </script>
   </div>
-
   <div class="map-btns">
-    <a class="map-btn kakao"
-      href="https://kko.to/lX7-xQgHdL"
-      target="_blank">
-      🗺 카카오맵
-    </a>
-    <a class="map-btn naver"
-      href="https://naver.me/xxY2U7vu"
-      target="_blank">
-      🗺 네이버지도
-    </a>
+    <a class="map-btn kakao" href="https://kko.to/lX7-xQgHdL" target="_blank">📍 카카오맵</a>
+    <a class="map-btn naver" href="https://naver.me/xxY2U7vu" target="_blank">📍 네이버지도</a>
   </div>
 </section>
 
 <script>
-  /*
-   * ─── 사진 데이터 설정 ───────────────────────────────
-   *
-   * 각 탭의 photos 배열에 이미지 경로를 입력하세요.
-   * 예: src: './images/studio_01.jpg'
-   *
-   * 사진이 없는 경우 src: null 로 두면 회색 플레이스홀더가 표시됩니다.
-   */
   const TABS = [
     {
-      id: 'studio',
-      label: '스튜디오',
+      id: 'studio', label: '스튜디오',
       photos: [
-        { src: './images/studio/01.jpg' }, { src: './images/studio/02.jpg' }, { src: './images/studio/03.jpg' }, { src: './images/studio/04.jpg' },
-        { src: './images/studio/05.jpg' }, { src: './images/studio/06.jpg' }, { src: './images/studio/07.jpg' }, { src: './images/studio/08.jpg' },
-        { src: './images/studio/09.jpg' }, { src: './images/studio/10.jpg' }, { src: './images/studio/11.jpg' },
+        { src: './images/studio/01.jpg' }, { src: './images/studio/02.jpg' }, { src: './images/studio/03.jpg' },
+        { src: './images/studio/04.jpg' }, { src: './images/studio/05.jpg' }, { src: './images/studio/06.jpg' },
+        { src: './images/studio/07.jpg' }, { src: './images/studio/08.jpg' }, { src: './images/studio/09.jpg' },
+        { src: './images/studio/10.jpg' }, { src: './images/studio/11.jpg' },
       ]
     },
     {
-      id: 'spring',
-      label: '봄',
+      id: 'spring', label: '봄',
       photos: [
-        { src: './images/spring/02.jpg' }, { src: './images/spring/03.jpg' }, { src: './images/spring/06.jpg' }, { src: './images/spring/07.jpg' },
-        { src: './images/spring/08.jpg' }, { src: './images/spring/09.jpg' }, { src: './images/spring/10.jpg' }, { src: './images/spring/11.jpg' },
+        { src: './images/spring/02.jpg' }, { src: './images/spring/03.jpg' }, { src: './images/spring/06.jpg' },
+        { src: './images/spring/07.jpg' }, { src: './images/spring/08.jpg' }, { src: './images/spring/09.jpg' },
+        { src: './images/spring/10.jpg' }, { src: './images/spring/11.jpg' },
       ]
     },
     {
-      id: 'summer',
-      label: '여름',
+      id: 'summer', label: '여름',
+      photos: [{ src: null }]
+    },
+    {
+      id: 'autumn', label: '가을',
       photos: [
-        { src: null },
+        { src: './images/autumn/01.jpg' }, { src: './images/autumn/03.jpg' }, { src: './images/autumn/05.jpg' },
+        { src: './images/autumn/06.jpg' }, { src: './images/autumn/07.jpg' }, { src: './images/autumn/08.jpg' },
+        { src: './images/autumn/10.jpg' }, { src: './images/autumn/11.jpg' },
       ]
     },
     {
-      id: 'autumn',
-      label: '가을',
+      id: 'winter', label: '겨울',
       photos: [
-        { src: './images/autumn/01.jpg' }, { src: './images/autumn/03.jpg' }, { src: './images/autumn/05.jpg' }, { src: './images/autumn/06.jpg' },
-        { src: './images/autumn/07.jpg' }, { src: './images/autumn/08.jpg' }, { src: './images/autumn/10.jpg' }, { src: './images/autumn/11.jpg' },
-      ]
-    },
-    {
-      id: 'winter',
-      label: '겨울',
-      photos: [
-        { src: './images/winter/01.jpg' }, { src: './images/winter/02.jpg' }, { src: './images/winter/03.jpg' }, { src: './images/winter/04.jpg' },
-        { src: './images/winter/05.jpg' }, { src: './images/winter/07.jpg' }, { src: './images/winter/09.jpg' }, { src: './images/winter/12.jpg' },
-        { src: './images/winter/13.jpg' }, { src: './images/winter/14.jpg' },
+        { src: './images/winter/01.jpg' }, { src: './images/winter/02.jpg' }, { src: './images/winter/03.jpg' },
+        { src: './images/winter/04.jpg' }, { src: './images/winter/05.jpg' }, { src: './images/winter/07.jpg' },
+        { src: './images/winter/09.jpg' }, { src: './images/winter/12.jpg' }, { src: './images/winter/13.jpg' },
+        { src: './images/winter/14.jpg' },
       ]
     },
   ];
 
-  /* ─── 내부 로직 (수정 불필요) ─────────────────────── */
-  const BG_COLORS = ['#e8e0d8','#ddd5ca','#f0ece6','#e4ddd4','#ede7e0','#f5f2ee'];
-
+  const BG_COLORS = ['#ede6de','#e6ddd4','#ebe3da','#e8e0d6','#eae2d8','#e4dcd2'];
   let currentTabIdx = 0;
   let currentPhotoIdx = 0;
-
   function getTabData() { return TABS[currentTabIdx]; }
 
-  /* 그리드 렌더 */
   function renderGrid() {
     const grid = document.getElementById('photoGrid');
     const tab = getTabData();
@@ -745,22 +754,17 @@
     });
   }
 
-  /* 라이트박스 열기 */
   function openLightbox(idx) {
     currentPhotoIdx = idx;
-    const lb = document.getElementById('lightbox');
-    lb.classList.add('open');
+    document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
     buildLightboxSlides();
     jumpToSlide(false);
   }
-
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
-
-  /* 슬라이드 생성 */
   function buildLightboxSlides() {
     const track = document.getElementById('lbTrack');
     const tab = getTabData();
@@ -774,24 +778,19 @@
         img.alt = `${tab.label} ${i + 1}`;
         slide.appendChild(img);
       } else {
-        slide.innerHTML = `<div class="lb-ph" style="background:${BG_COLORS[i % BG_COLORS.length]}"><span style="font-size:11px;color:#999;">${tab.label} 사진 ${i + 1}</span><span style="font-size:10px;color:#bbb;">images/${tab.id}_0${i+1}.jpg</span></div>`;
+        slide.innerHTML = `<div class="lb-ph" style="background:#2a2520"><span style="font-size:11px;color:#666;">${tab.label} ${i + 1}</span></div>`;
       }
       track.appendChild(slide);
     });
   }
-
-  /* 슬라이드 위치 이동 */
   function jumpToSlide(animate) {
     const track = document.getElementById('lbTrack');
-    const counter = document.getElementById('lbCounter');
-    const label = document.getElementById('lbSectionLabel');
     const tab = getTabData();
     track.style.transition = animate ? 'transform 0.38s cubic-bezier(0.4,0,0.2,1)' : 'none';
     track.style.transform = `translateX(-${currentPhotoIdx * 100}%)`;
-    counter.textContent = `${currentPhotoIdx + 1} / ${tab.photos.length}`;
-    label.textContent = tab.label;
+    document.getElementById('lbCounter').textContent = `${currentPhotoIdx + 1} / ${tab.photos.length}`;
+    document.getElementById('lbSectionLabel').textContent = tab.label;
   }
-
   function prevPhoto() {
     const len = getTabData().photos.length;
     currentPhotoIdx = (currentPhotoIdx - 1 + len) % len;
@@ -803,33 +802,24 @@
     jumpToSlide(true);
   }
 
-  /* 이벤트 바인딩 */
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   document.getElementById('lbPrev').addEventListener('click', prevPhoto);
   document.getElementById('lbNext').addEventListener('click', nextPhoto);
-
   document.getElementById('lightbox').addEventListener('click', e => {
     if (e.target === document.getElementById('lightbox')) closeLightbox();
   });
-
-  /* 키보드 */
   document.addEventListener('keydown', e => {
     if (!document.getElementById('lightbox').classList.contains('open')) return;
     if (e.key === 'ArrowLeft') prevPhoto();
     if (e.key === 'ArrowRight') nextPhoto();
     if (e.key === 'Escape') closeLightbox();
   });
-
-  /* 터치 스와이프 */
   let touchStartX = 0;
-  const lbWrap = document.getElementById('lbTrackWrap');
-  lbWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  lbWrap.addEventListener('touchend', e => {
+  document.getElementById('lbTrackWrap').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.getElementById('lbTrackWrap').addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 44) diff > 0 ? nextPhoto() : prevPhoto();
   });
-
-  /* 탭 전환 */
   document.querySelectorAll('.tab').forEach((tab, idx) => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -839,8 +829,18 @@
     });
   });
 
-  /* 초기 렌더 */
   renderGrid();
+
+  /* D-Day 계산 */
+  (function() {
+    const wedding = new Date('2026-09-13T12:30:00');
+    const now = new Date();
+    const diff = Math.ceil((wedding - now) / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('ddayNumber');
+    if (diff > 0) el.textContent = 'D-' + diff;
+    else if (diff === 0) el.textContent = 'D-Day';
+    else el.textContent = 'D+' + Math.abs(diff);
+  })();
 </script>
 </body>
 </html>
