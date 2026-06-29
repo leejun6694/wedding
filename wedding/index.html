@@ -438,7 +438,7 @@
     /* ━━━ 7. 지도 — #faf7f4 ━━━ */
     .map-section {
       background: var(--s1);
-      padding: 56px 0 52px;
+      padding: 56px 0 10px;
     }
     .map-venue {
       font-size: 15px;
@@ -474,6 +474,92 @@
     .map-btn:active { opacity: 0.7; }
     .map-btn.kakao { background: #FEE500; color: #3C1E1E; }
     .map-btn.naver { background: #03C75A; color: #fff; }
+    /* ━━━ 교통편 ━━━ */
+    .transport-section {
+      padding: 0px 24px 52px;
+    }
+    .transport-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .transport-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #c4b8ac;
+      stroke-width: 1.75;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .transport-item {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+      gap: 12px;
+    }
+    .transport-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+    .transport-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+    .transport-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .transport-content {
+      width: 100%;
+      padding-left: 44px; /* 아이콘 36px + gap 8px */
+    }
+    .transport-line {
+      font-size: 12px;
+      color: var(--gray);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    .transport-line strong {
+      color: var(--black);
+      font-weight: 500;
+    }
+    .transport-sub {
+      font-size: 11px;
+      color: #bbb;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin-top: 4px;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    .transport-tag {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .tag-line7 { background: #6d7e6e; color: #fff; }
+    .tag-bundang { background: #f5a623; color: #fff; }
+    .tag-trunk { background: #3a6bc8; color: #fff; }
+    .tag-branch { background: #5aaa5a; color: #fff; }
+    .tag-village { background: #5F9E32; color: #fff; }
+    .tag-express { background: #e05a2b; color: #fff; }
+    .tag-airport { background: #7293BC; color: #fff; }
 
     /* ━━━ 닫는말 섹션 ━━━ */
     .closing-section {
@@ -848,6 +934,75 @@
     <a class="map-btn naver" href="https://naver.me/xxY2U7vu" target="_blank">📍 네이버지도</a>
   </div>
 </section>
+
+<div class="transport-section">
+  <!-- 자가용 -->
+  <div class="transport-item">
+    <div class="transport-header">
+      <div class="transport-icon">
+        <svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/><path d="M8 17h5"/><path d="M14 2v6h-5"/><path d="M15 17h6l-2-5H9l-2 5"/></svg>
+      </div>
+      <p class="transport-title">자가용</p>
+    </div>
+    <div class="transport-content">
+      <div class="transport-lines">
+        <p class="transport-line">내비게이션에 <strong>"셀렙앤어셈"</strong> 또는 <strong>"건설회관"</strong> 검색</p>
+        <p class="transport-sub">도로명 · 서울 강남구 언주로 711</p>
+        <p class="transport-line" style="margin-top:6px;">🕐 <strong>1시간 30분</strong> 무료 주차 (추가 10분당 900원)</p>
+        <p class="transport-line">💬 <span style="color:var(--gray);font-size:12px;">1, 2층 안내데스크에서 주차 등록 가능</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 지하철 -->
+  <div class="transport-item">
+    <div class="transport-header">
+      <div class="transport-icon">
+        <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M9 9h6"/><path d="M9 13h6"/><circle cx="9" cy="17.5" r="1.5"/><circle cx="15" cy="17.5" r="1.5"/><path d="M4 7h16"/><path d="M9 19l-2 2"/><path d="M15 19l2 2"/></svg>
+      </div>
+      <p class="transport-title">지하철</p>
+    </div>
+    <div class="transport-content">
+      <div class="transport-lines">
+        <p class="transport-line">
+          <span class="transport-tag tag-line7">7호선</span>
+          <strong>학동역 10번 출구</strong>
+        </p>
+        <p class="transport-line">
+          <span class="transport-tag tag-bundang">수인분당선</span>
+          <strong>강남구청역 3번 출구</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 버스 -->
+  <div class="transport-item">
+    <div class="transport-header">
+      <div class="transport-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M16 6v6"/><path d="M2 12h19.6"/><path d="M18 18h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/><path d="M10 18h4"/></svg>
+      </div>
+      <p class="transport-title">버스</p>
+    </div>
+    <div class="transport-content">
+      <div class="transport-lines">
+        <p class="transport-line"><strong>서울세관 정류장</strong> 하차</p>
+        <p class="transport-sub">
+          <span class="transport-tag tag-trunk">간선</span>141 &nbsp;
+          <span class="transport-tag tag-express">직행</span>3600 &nbsp;
+          <span class="transport-tag tag-airport">공항</span>6703
+        </p>
+        <p class="transport-line" style="margin-top:8px;"><strong>서울세관사거리 정류장</strong> 하차</p>
+        <p class="transport-sub">
+          <span class="transport-tag tag-trunk">간선</span>401 &nbsp;
+          <span class="transport-tag tag-branch">지선</span>6411, 8641 &nbsp;
+          <span class="transport-tag tag-village">마을</span>08
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <!-- 닫는말 섹션 -->
 <section class="closing-section">
