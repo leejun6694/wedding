@@ -175,8 +175,9 @@
       position: fixed;
       inset: 0;
       z-index: 2000;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
+      padding: 24px;
     }
     .contact-modal.open { display: flex; }
     .modal-backdrop {
@@ -188,32 +189,32 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 430px;
+      max-width: 360px;
       background: #fff;
-      border-radius: 20px 20px 0 0;
-      padding: 0 0 40px;
-      max-height: 85vh;
+      border-radius: 16px;
+      padding: 0 0 24px;
+      max-height: 80vh;
       overflow-y: auto;
-      animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
+      animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
     }
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to   { transform: translateY(0); }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
     }
-    .modal-handle {
-      width: 36px; height: 4px;
-      background: #e0d8d0;
-      border-radius: 2px;
-      margin: 14px auto 20px;
+    .modal-handle { display: none; }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
     }
     .modal-title {
       font-family: 'Noto Serif KR', serif;
       font-size: 16px;
       font-weight: 600;
-      text-align: center;
       color: var(--black);
-      padding: 0 24px 20px;
       letter-spacing: 1px;
+      padding: 0;
     }
     .modal-group-label {
       font-size: 11px;
@@ -225,6 +226,22 @@
       text-transform: uppercase;
       border-top: 1px solid var(--border);
     }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--s2);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--border); }
     .contact-item {
       display: flex;
       align-items: center;
@@ -764,12 +781,13 @@
   <button class="contact-btn" onclick="openContactModal()">💌 축하 연락하기</button>
 </section>
 
-<!-- 연락하기 모달 -->
 <div class="contact-modal" id="contactModal">
   <div class="modal-backdrop" onclick="closeContactModal()"></div>
   <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <p class="modal-title">축하 연락하기</p>
+    <div class="modal-header">
+      <p class="modal-title">축하 연락하기</p>
+      <button class="modal-close" onclick="closeContactModal()">✕</button>
+    </div>
 
     <p class="modal-group-label">신랑측</p>
     <div class="contact-item">
