@@ -113,21 +113,12 @@
       padding: 52px 32px;
       text-align: center;
     }
-    .family-ornament {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-    .orn-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .orn-icon {
-      font-size: 14px;
-      color: var(--point);
-      opacity: 0.55;
+    .family-flower {
+      display: block;
+      width: 160px;
+      margin: 0 auto 16px;
+      opacity: 0.92;
+      mix-blend-mode: multiply;
     }
     .family-names {
       display: flex;
@@ -160,6 +151,117 @@
       color: var(--black);
       letter-spacing: 2px;
     }
+
+    /* 축하 연락하기 버튼 */
+    .contact-btn {
+      display: block;
+      margin: 32px auto 0;
+      padding: 13px 32px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--gray);
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .contact-btn:hover { border-color: var(--point); color: var(--point); }
+
+    /* 연락하기 모달 */
+    .contact-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .contact-modal.open { display: flex; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    .modal-sheet {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      padding: 0 0 40px;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
+    }
+    .modal-handle {
+      width: 36px; height: 4px;
+      background: #e0d8d0;
+      border-radius: 2px;
+      margin: 14px auto 20px;
+    }
+    .modal-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--black);
+      padding: 0 24px 20px;
+      letter-spacing: 1px;
+    }
+    .modal-group-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--point);
+      opacity: 0.8;
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 16px 24px 8px;
+      text-transform: uppercase;
+      border-top: 1px solid var(--border);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .contact-item + .contact-item {
+      border-top: 1px solid #f5f0ea;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+    .contact-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 0.5px;
+    }
+    .contact-role {
+      font-size: 12px;
+      color: var(--gray);
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .call-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--point-light);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .call-btn:active { background: #f0d8d4; }
 
     /* ━━━ 4+5. 날짜 + 달력 통합 — #f5f0ea ━━━ */
     .date-cal-section {
@@ -548,13 +650,9 @@
   </p>
 </section>
 
-<!-- ③ 부모님 소개 — #faf7f4 -->
+<!-- ③ 부모님 소개 -->
 <section class="family-section">
-  <div class="family-ornament">
-    <div class="orn-line"></div>
-    <span class="orn-icon">❀</span>
-    <div class="orn-line"></div>
-  </div>
+  <img class="family-flower" src="./images/flower.png" alt="" />
   <div class="family-names">
     <div class="family-row">
       <span class="parents">이순호 · 김매화</span>
@@ -567,7 +665,63 @@
       <span class="person-name">김수빈</span>
     </div>
   </div>
+  <button class="contact-btn" onclick="openContactModal()">💌 축하 연락하기</button>
 </section>
+
+<!-- 연락하기 모달 -->
+<div class="contact-modal" id="contactModal">
+  <div class="modal-backdrop" onclick="closeContactModal()"></div>
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <p class="modal-title">축하 연락하기</p>
+
+    <p class="modal-group-label">신랑측</p>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">이 준</span>
+        <span class="contact-role">신랑</span>
+      </div>
+      <a class="call-btn" href="tel:010-2588-3320">📞</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">이순호</span>
+        <span class="contact-role">신랑 아버지</span>
+      </div>
+      <a class="call-btn" href="tel:010-0000-0000">📞</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">김매화</span>
+        <span class="contact-role">신랑 어머니</span>
+      </div>
+      <a class="call-btn" href="tel:010-0000-0000">📞</a>
+    </div>
+
+    <p class="modal-group-label">신부측</p>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">김수빈</span>
+        <span class="contact-role">신부</span>
+      </div>
+      <a class="call-btn" href="tel:010-3396-3478">📞</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">김승준</span>
+        <span class="contact-role">신부 아버지</span>
+      </div>
+      <a class="call-btn" href="tel:010-0000-0000">📞</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <span class="contact-name">조혜경</span>
+        <span class="contact-role">신부 어머니</span>
+      </div>
+      <a class="call-btn" href="tel:010-0000-0000">📞</a>
+    </div>
+  </div>
+</div>
 
 <!-- ④+⑤ 날짜 + 달력 통합 — #f5f0ea -->
 <section class="date-cal-section">
@@ -830,6 +984,15 @@
   });
 
   renderGrid();
+
+  function openContactModal() {
+    document.getElementById('contactModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contactModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   /* D-Day 계산 */
   (function() {
